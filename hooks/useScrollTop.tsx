@@ -6,7 +6,7 @@ export const useScrollTop = (threshold = 10) => {
 
   useEffect(() => {
 
-    // 如果垂直滚动超过10单位，则更改 scrolled 变量状态
+    // 如果垂直滚动超过10单位，则更改 scrolled 状态
     const handleScroll = () => {
       if (window.scrollY > threshold) {
         setScrolled(true);
