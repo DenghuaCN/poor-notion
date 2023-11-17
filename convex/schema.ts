@@ -1,7 +1,9 @@
 import { defineSchema, defineTable  } from "convex/server";
 import { v } from "convex/values";
 
-
+/**
+ * @desc 定义documents Table
+ */
 export default defineSchema({
   documents: defineTable({
     title: v.string(),

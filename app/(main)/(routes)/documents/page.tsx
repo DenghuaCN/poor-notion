@@ -15,6 +15,9 @@ const DocumentsPage = () => {
 
   const create = useMutation(api.documents.create);
 
+  /**
+   * @desc 创建新笔记
+   */
   const handleCreateNote = () => {
     const promise = create({ title: "Untitled" });
 

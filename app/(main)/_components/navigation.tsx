@@ -1,21 +1,31 @@
 "use client";
 
-import { useQuery } from "convex/react";
-import { useMediaQuery } from "usehooks-ts";
-import { ChevronsLeft, MenuIcon } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { toast } from "sonner";
 import { ElementRef, useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useMutation, useQuery } from "convex/react";
+import { useMediaQuery } from "usehooks-ts";
+import {
+  ChevronsLeft,
+  MenuIcon,
+  PlusCircle,
+  Search,
+  Settings
+} from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { api } from "@/convex/_generated/api";
 
 import { UserItem } from './user-item';
+import { Item } from "./item";
 
 export const Navigation = () => {
   const pathname = usePathname();
 
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const documents = useQuery(api.documents.get);
+
+  const documents = useQuery(api.documents.get); // documents表查询
+  const create = useMutation(api.documents.create); // document表创建项目
 
   const isResizingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<"aside">>(null);
@@ -76,6 +86,9 @@ export const Navigation = () => {
     document.removeEventListener("mouseup", handleMouseUp);
   }
 
+  /**
+   * @desc 重置sidebar宽度
+   */
   const resetWidth = () => {
     if (sidebarRef.current && navbarRef.current) {
       setIsCollapsed(false);
@@ -84,10 +97,13 @@ export const Navigation = () => {
       sidebarRef.current.style.width = isMobile ? "100%" : "240px";
       navbarRef.current.style.setProperty("width", isMobile ? "0" : "calc(100% - 240px)");
       navbarRef.current.style.setProperty("left", isMobile ? "100%" : "240px");
-      setTimeout(() => {setIsResetting(false)}, 300); // 重置此状态，以便下一次重新使用动画CSS
+      setTimeout(() => { setIsResetting(false) }, 300); // 重置此状态，以便下一次重新使用动画CSS
     }
   }
 
+  /**
+   * @desc 折叠sidebar
+   */
   const collapse = () => {
     if (sidebarRef.current && navbarRef.current) {
       setIsCollapsed(true);
@@ -96,8 +112,21 @@ export const Navigation = () => {
       sidebarRef.current.style.width = "0";
       navbarRef.current.style.setProperty("width", "100%");
       navbarRef.current.style.setProperty("left", "0");
-      setTimeout(() => {setIsResetting(false)}, 300); // 重置此状态，以便下一次重新使用动画CSS
+      setTimeout(() => { setIsResetting(false) }, 300); // 重置此状态，以便下一次重新使用动画CSS
     }
+  }
+
+  /**
+   * @desc 创建新的page
+   */
+  const handleCreate = () => {
+    const promise = create({ title: "Untitled" })
+
+    toast.promise(promise, {
+      loading: "Create a new note...",
+      success: "New note created!",
+      error: "Failed to create a new note."
+    })
   }
 
 
@@ -112,7 +141,7 @@ export const Navigation = () => {
           isMobile && "w-0"
         )}
       >
-
+        {/* Left Collapse Icon */}
         <div
           role="button"
           onClick={collapse}
@@ -126,14 +155,33 @@ export const Navigation = () => {
 
         <div>
           <UserItem />
+          {/* Search */}
+          <Item
+            label="Search"
+            icon={Search}
+            isSearch
+            onClick={() => { }}
+          />
+          {/* Settings */}
+          <Item
+            label="Settings"
+            icon={Settings}
+            onClick={() => { }}
+          />
+          {/* Create new Page */}
+          <Item
+            onClick={handleCreate}
+            label="New Page"
+            icon={PlusCircle}
+          />
         </div>
 
+        {/* Render Document list */}
         <div className="mt-4">
-          {documents?.map((document) => (
-            <p key={document._id}>{document.title}</p>
-          ))}
+          {documents?.map((document) => (<p key={document._id}>{document.title}</p>))}
         </div>
 
+        {/* Sidebar Width Move Bar */}
         <div
           onMouseDown={handleMouseDown}
           onClick={resetWidth}
