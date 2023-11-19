@@ -3,11 +3,17 @@
 import {
   ChevronDown,
   ChevronRight,
-  LucideIcon
+  LucideIcon,
+  Plus
 } from "lucide-react";
+import { toast } from "sonner";
+import { useMutation } from "convex/react";
+import { useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { Id } from "@/convex/_generated/dataModel";
+import { Skeleton } from "@/components/ui/skeleton";
+import { api } from "@/convex/_generated/api";
 
 interface ItemProps {
   id?: Id<"documents">;
@@ -35,6 +41,44 @@ export const Item = ({
   id
 }: ItemProps) => {
 
+  const router = useRouter();
+
+  const createDocument = useMutation(api.documents.create);
+
+  /**
+   * @desc 点击层级展开icon
+   */
+  const handleExpand = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    // 阻止事件冒泡，否则触发onRedirect函数改变路由
+    event.stopPropagation();
+
+    onExpand?.();
+  }
+
+  /**
+   * @desc 新增Page
+   */
+  const onCreate = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation();
+
+    if (!id) {
+      return;
+    };
+
+    // 新增Page， 并记入其父document ID
+    const promise = createDocument({ title: 'Untitled', parentDocument: id }).then((documentId) => {
+      if (!expanded) onExpand?.();
+
+      // router.push(`/documents/${documentId}`);
+    })
+
+    toast.promise(promise, {
+      loading: "Create a new note...",
+      success: "New note created!",
+      error: "Failed to create a new note."
+    })
+  }
+
   const ChevronIcon = expanded ? ChevronDown : ChevronRight;
 
 
@@ -50,15 +94,14 @@ export const Item = ({
         active && "bg-primary/5 text-primary"
       )}
     >
+      {/* 层级展开收缩icon */}
       {!!id && (
         <div
           role="button"
           className="h-full rounded-sm hover:bg-neutral-300 dark:bg-neutral-600 mr-1"
-          onClick={() => { }}
+          onClick={handleExpand}
         >
-          <ChevronIcon
-            className="h-4 w-4 shrink-0 text-muted-foreground/50"
-          />
+          <ChevronIcon className="h-4 w-4 shrink-0 text-muted-foreground/50" />
         </div>
       )}
 
@@ -77,6 +120,36 @@ export const Item = ({
           <span className="text-xs">command/ctrl + </span>K
         </kbd>
       )}
+
+      {/* 新建Page/删除Page */}
+      {!!id && (
+        <div className="ml-auto flex items-center gap-x-2">
+          {/* hover时显示新增icon */}
+          <div
+            role="button"
+            className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:bg-neutral-600"
+            onClick={onCreate}
+          >
+            <Plus className="h-4 w-4 text-muted-foreground" />
+          </div>
+
+
+        </div>
+      )}
+    </div>
+  )
+}
+
+Item.Skeleton = function ItemSkeleton({ level }: { level?: number }) {
+  return (
+    <div
+      style={{
+        paddingLeft: level ? `${(level * 12) + 25}px` : "12px"
+      }}
+      className="flex gap-x-2 py-[3px]"
+    >
+      <Skeleton className="h-4 w-4" />
+      <Skeleton className="h-4 w-[30%]" />
     </div>
   )
 }

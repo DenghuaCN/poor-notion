@@ -3,7 +3,7 @@
 import { toast } from "sonner";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation } from "convex/react";
 import { useMediaQuery } from "usehooks-ts";
 import {
   ChevronsLeft,
@@ -18,14 +18,14 @@ import { api } from "@/convex/_generated/api";
 
 import { UserItem } from './user-item';
 import { Item } from "./item";
+import { DocumentList } from "./document-list";
 
 export const Navigation = () => {
   const pathname = usePathname();
 
   const isMobile = useMediaQuery("(max-width: 768px)");
 
-  const documents = useQuery(api.documents.get); // documents表查询
-  const create = useMutation(api.documents.create); // document表创建项目
+   const create = useMutation(api.documents.create); // document表创建项目
 
   const isResizingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<"aside">>(null);
@@ -178,7 +178,7 @@ export const Navigation = () => {
 
         {/* Render Document list */}
         <div className="mt-4">
-          {documents?.map((document) => (<p key={document._id}>{document.title}</p>))}
+          <DocumentList />
         </div>
 
         {/* Sidebar Width Move Bar */}
