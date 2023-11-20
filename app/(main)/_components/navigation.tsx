@@ -8,24 +8,32 @@ import { useMediaQuery } from "usehooks-ts";
 import {
   ChevronsLeft,
   MenuIcon,
+  Plus,
   PlusCircle,
   Search,
-  Settings
+  Settings,
+  Trash
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { api } from "@/convex/_generated/api";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent
+} from "@/components/ui/popover";
 
 import { UserItem } from './user-item';
 import { Item } from "./item";
 import { DocumentList } from "./document-list";
+import { TrashBox } from "./trash-box";
 
 export const Navigation = () => {
   const pathname = usePathname();
 
   const isMobile = useMediaQuery("(max-width: 768px)");
 
-   const create = useMutation(api.documents.create); // document表创建项目
+  const create = useMutation(api.documents.create); // document表创建项目
 
   const isResizingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<"aside">>(null);
@@ -179,6 +187,23 @@ export const Navigation = () => {
         {/* Render Document list */}
         <div className="mt-4">
           <DocumentList />
+          {/* Add a page */}
+          <Item
+            onClick={handleCreate}
+            icon={Plus}
+            label="Add a page"
+          />
+          <Popover>
+            <PopoverTrigger className="w-full mt-4">
+              <Item label="Trash" icon={Trash} />
+            </PopoverTrigger>
+            <PopoverContent
+              className="p-0 w-72"
+              side={isMobile ? "bottom" : "right"}
+            >
+              <TrashBox />
+            </PopoverContent>
+          </Popover>
         </div>
 
         {/* Sidebar Width Move Bar */}
