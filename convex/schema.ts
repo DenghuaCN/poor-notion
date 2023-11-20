@@ -15,6 +15,6 @@ export default defineSchema({
     icon: v.optional(v.string()),
     isPublished: v.boolean(),
   })
-  .index("by_user", ["userId"])
+  .index("by_user", ["userId"]) // 对userId字段 创建 索引
   .index("by_user_parent", ["userId", "parentDocument"])
 })
