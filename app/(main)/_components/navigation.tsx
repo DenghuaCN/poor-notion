@@ -23,6 +23,7 @@ import {
   PopoverContent
 } from "@/components/ui/popover";
 import { useSearch } from "@/hooks/use-search";
+import { useSettings } from "@/hooks/use-settings";
 
 import { UserItem } from './user-item';
 import { Item } from "./item";
@@ -41,7 +42,8 @@ export const Navigation = () => {
   const [isResetting, setIsResetting] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(isMobile);
 
-  const { onOpen } = useSearch();
+  const settingsModal = useSettings()
+  const searchModal = useSearch();
 
 
   useEffect(() => {
@@ -170,13 +172,13 @@ export const Navigation = () => {
             label="Search"
             icon={Search}
             isSearch
-            onClick={onOpen}
+            onClick={searchModal.onOpen}
           />
           {/* Settings */}
           <Item
             label="Settings"
             icon={Settings}
-            onClick={() => { }}
+            onClick={settingsModal.onOpen}
           />
           {/* Create new Page */}
           <Item

@@ -92,18 +92,21 @@ export const TrashBox = () => {
               {document.title}
             </span>
             <div className="flex items-center">
+
+              {/* 撤回删除Page按钮 */}
               <div
                 role="button"
                 onClick={(e) => onRestore(e, document._id)}
-                className="rounded-sm p-2 hover:bg-neutral-200"
+                className="rounded-sm p-2 hover:bg-neutral-200 dark:hover:bg-neutral-600"
               >
                 <Undo className="h-4 w4 text-muted-foreground" />
               </div>
 
               <ConfirmModal onConfirm={() => onRemove(document._id)}>
+                {/* 永久删除按钮 */}
                 <div
                   role="button"
-                  className="rounded-sm p-2 hover:bg-neutral-200"
+                  className="rounded-sm p-2 hover:bg-neutral-200 dark:hover:bg-neutral-600"
                 >
                   <Trash className="h-4 w-4 text-muted-foreground" />
                 </div>
