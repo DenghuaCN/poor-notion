@@ -14,6 +14,15 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as api_archive from "../api/archive";
+import type * as api_create from "../api/create";
+import type * as api_getById from "../api/getById";
+import type * as api_getSearch from "../api/getSearch";
+import type * as api_getSidebar from "../api/getSidebar";
+import type * as api_getTrash from "../api/getTrash";
+import type * as api_remove from "../api/remove";
+import type * as api_restore from "../api/restore";
+import type * as api_update from "../api/update";
 import type * as documents from "../documents";
 
 /**
@@ -25,6 +34,15 @@ import type * as documents from "../documents";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  "api/archive": typeof api_archive;
+  "api/create": typeof api_create;
+  "api/getById": typeof api_getById;
+  "api/getSearch": typeof api_getSearch;
+  "api/getSidebar": typeof api_getSidebar;
+  "api/getTrash": typeof api_getTrash;
+  "api/remove": typeof api_remove;
+  "api/restore": typeof api_restore;
+  "api/update": typeof api_update;
   documents: typeof documents;
 }>;
 export declare const api: FilterApi<
