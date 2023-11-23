@@ -7,6 +7,7 @@ import archive from "./api/archive";
 import getSidebar from "./api/getSidebar";
 import getById from "./api/getById";
 import update from './api/update';
+import removeIcon from "./api/removeIcon";
 
 export {
   create,
@@ -17,5 +18,6 @@ export {
   archive,
   getSidebar,
   getById,
-  update
+  update,
+  removeIcon
 }

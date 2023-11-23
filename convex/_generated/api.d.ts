@@ -21,6 +21,7 @@ import type * as api_getSearch from "../api/getSearch";
 import type * as api_getSidebar from "../api/getSidebar";
 import type * as api_getTrash from "../api/getTrash";
 import type * as api_remove from "../api/remove";
+import type * as api_removeIcon from "../api/removeIcon";
 import type * as api_restore from "../api/restore";
 import type * as api_update from "../api/update";
 import type * as documents from "../documents";
@@ -41,6 +42,7 @@ declare const fullApi: ApiFromModules<{
   "api/getSidebar": typeof api_getSidebar;
   "api/getTrash": typeof api_getTrash;
   "api/remove": typeof api_remove;
+  "api/removeIcon": typeof api_removeIcon;
   "api/restore": typeof api_restore;
   "api/update": typeof api_update;
   documents: typeof documents;

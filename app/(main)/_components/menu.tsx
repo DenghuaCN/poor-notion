@@ -44,13 +44,13 @@ export const Menu = ({ documentId, createTime }: MenuProps) => {
 
   return (
     <DropdownMenu>
-
+      {/* Trigger */}
       <DropdownMenuTrigger asChild>
         <Button size="sm" variant="ghost">
           <MoreHorizontal className="h-4 w-4"></MoreHorizontal>
         </Button>
       </DropdownMenuTrigger>
-
+      {/* Content */}
       <DropdownMenuContent className="w-120" align="end" alignOffset={8} forceMount>
         <DropdownMenuItem onClick={onArchive}>
           <Trash className="h-4 w-4 mr-2" />
