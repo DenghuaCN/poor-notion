@@ -8,6 +8,7 @@ import getSidebar from "./api/getSidebar";
 import getById from "./api/getById";
 import update from './api/update';
 import removeIcon from "./api/removeIcon";
+import removeCoverImage from "./api/removeCoverImage";
 
 export {
   create,
@@ -19,5 +20,6 @@ export {
   getSidebar,
   getById,
   update,
-  removeIcon
+  removeIcon,
+  removeCoverImage
 }

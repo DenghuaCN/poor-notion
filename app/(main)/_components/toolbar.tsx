@@ -10,6 +10,7 @@ import { IconPicker } from "@/components/icon-picker";
 import { Button } from "@/components/ui/button";
 import { Doc } from "@/convex/_generated/dataModel";
 import { api } from "@/convex/_generated/api";
+import { useCoverImage } from "@/hooks/use-cover-image";
 
 interface ToolbarProps {
   initialData: Doc<"documents">;
@@ -28,6 +29,8 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
 
   const update = useMutation(api.documents.update);
   const removeIcon = useMutation(api.documents.removeIcon);
+
+  const coverImageStore = useCoverImage();
 
   const enableInput = () => {
     if (preview) return;
@@ -122,7 +125,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
         {/* Add cover按钮，只在缺少封面 且 为编辑状态下才显示 */}
         {!initialData.coverImage && !preview && (
           <Button
-            onClick={() => { }}
+            onClick={coverImageStore.onOpen}
             className="text-muted-foreground text-xs"
             variant="outline"
             size="sm"

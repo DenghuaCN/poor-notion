@@ -8,6 +8,8 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ConvexClientProvider } from '@/components/providers/convex-provider';
 import { ModalProvider } from '@/components/providers/modal-provider';
 
+import { EdgeStoreProvider } from '@/lib/edgestore';
+
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -42,18 +44,25 @@ export default function RootLayout({
 
         {/* 数据管理与身份验证 */}
         <ConvexClientProvider>
-          {/* 切换黑白模式 */}
-          <ThemeProvider
-            attribute='class'
-            defaultTheme='system'
-            enableSystem
-            disableTransitionOnChange
-            storageKey='notion-theme-2'
-          >
-            <Toaster position='bottom-center' />
-            <ModalProvider />
-            {children}
-          </ThemeProvider>
+          {/* Edge存储桶服务 */}
+          <EdgeStoreProvider>
+            {/* 切换黑白模式 */}
+            <ThemeProvider
+              attribute='class'
+              defaultTheme='system'
+              enableSystem
+              disableTransitionOnChange
+              storageKey='notion-theme-2'
+            >
+              {/* Toast */}
+              <Toaster position='bottom-center' />
+              {/* Dialog */}
+              <ModalProvider />
+
+              {children}
+
+            </ThemeProvider>
+          </EdgeStoreProvider>
         </ConvexClientProvider>
 
       </body>
