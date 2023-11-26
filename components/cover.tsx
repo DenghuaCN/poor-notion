@@ -12,6 +12,7 @@ import { useParams } from "next/navigation";
 import { Id } from "@/convex/_generated/dataModel";
 import { RemoveCoverImageModal } from "./modals/remove-cover-modal";
 import { useEdgeStore } from "@/lib/edgestore";
+import { Skeleton } from "@/components/ui/skeleton";
 
 
 interface CoverProps {
@@ -85,5 +86,11 @@ export const Cover = ({ url, preview }: CoverProps) => {
         </div>
       )}
     </div>
+  )
+}
+
+Cover.Skeleton = function CoverSkeleton() {
+  return (
+    <Skeleton className="w-full h-[12vh]" />
   )
 }
