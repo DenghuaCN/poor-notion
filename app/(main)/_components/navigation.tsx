@@ -2,7 +2,7 @@
 
 import { toast } from "sonner";
 import { ElementRef, useEffect, useRef, useState } from "react";
-import { useParams, usePathname } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { useMutation } from "convex/react";
 import { useMediaQuery } from "usehooks-ts";
 import {
@@ -36,6 +36,7 @@ export const Navigation = () => {
   const params = useParams();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const create = useMutation(api.documents.create); // document表创建项目
+  const router = useRouter();
 
   const isResizingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<"aside">>(null);
@@ -134,7 +135,10 @@ export const Navigation = () => {
    * @desc 创建新的page
    */
   const handleCreate = () => {
-    const promise = create({ title: "Untitled" })
+    const promise = create({ title: "Untitled" }).then((documentId) => {
+      // 创建新的Page后直接重定向到对应Page
+      router.push(`/documents/${documentId}`)
+    })
 
     toast.promise(promise, {
       loading: "Create a new note...",

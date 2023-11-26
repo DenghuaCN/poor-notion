@@ -8,8 +8,10 @@ import { toast } from "sonner";
 import { api } from "@/convex/_generated/api";
 import { useUser } from "@clerk/clerk-react";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 const DocumentsPage = () => {
+  const router = useRouter();
 
   const { user } = useUser();
 
@@ -19,7 +21,9 @@ const DocumentsPage = () => {
    * @desc 创建新笔记
    */
   const handleCreateNote = () => {
-    const promise = create({ title: "Untitled" });
+    const promise = create({ title: "Untitled" }).then((documentId) => {
+      router.push(`/documents/${documentId}`)
+    })
 
     toast.promise(promise, {
       loading: "Creating a new note...",

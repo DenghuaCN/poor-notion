@@ -64,7 +64,10 @@ export const Item = ({
 
     if (!id) return;
 
-    const promise = archiveDocument({ id });
+    const promise = archiveDocument({ id }).then(() => {
+      router.replace("/documents")
+    })
+
     toast.promise(promise, {
       loading: "Moving to trash...",
       success: "Note moved to trash!",
@@ -96,7 +99,7 @@ export const Item = ({
     const promise = createDocument({ title: 'Untitled', parentDocument: id }).then((documentId) => {
       if (!expanded) onExpand?.();
 
-      // router.push(`/documents/${documentId}`);
+      router.push(`/documents/${documentId}`);
     })
 
     toast.promise(promise, {
