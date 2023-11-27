@@ -95,7 +95,6 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
           >
             <X className="h-4 w-4" />
           </Button>
-          11111
         </div>
       )}
 
@@ -103,7 +102,6 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
       {!!initialData.icon && preview && (
         <p className="text-6xl pt-6">
           {initialData.icon}
-          2222
         </p>
       )}
 
