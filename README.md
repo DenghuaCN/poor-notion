@@ -1,36 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# [Poor Notion](https://poor-notion.netlify.app/)
 
-## Getting Started
+![next version](https://img.shields.io/github/package-json/dependency-version/DenghuaCN/poor-notion/next?style=flat-square)
+![react version](https://img.shields.io/github/package-json/dependency-version/DenghuaCN/poor-notion/react?style=flat-square)
+![convex version](https://img.shields.io/github/package-json/dependency-version/DenghuaCN/poor-notion/convex?style=flat-square)
+![](https://img.shields.io/badge/node-%3E18-blue)
 
-First, run the development server:
+## 介绍
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+一个简易的类Notion笔记应用，可以创建你的公开/私人笔记，包含插入图片，回收站等功能。并可发布笔记并预览。
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+基于 `Next18` 与 `Convex` 开发，并使用`Clerk`作为鉴权服务，Pre-CSS使用`Tailwind`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Preview
 
-## Learn More
+### [Poor Notion](https://poor-notion.netlify.app/)
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[MIT](https://opensource.org/licenses/MIT)
