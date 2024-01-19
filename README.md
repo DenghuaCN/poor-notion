@@ -1,4 +1,5 @@
 # [Poor Notion](https://poor-notion.netlify.app/)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5afd188e-f159-4a5f-8a6f-698b64a6f5b0/deploy-status)](https://app.netlify.com/sites/poor-notion/deploys)
 
 ![next version](https://img.shields.io/github/package-json/dependency-version/DenghuaCN/poor-notion/next?style=flat-square)
 ![react version](https://img.shields.io/github/package-json/dependency-version/DenghuaCN/poor-notion/react?style=flat-square)
